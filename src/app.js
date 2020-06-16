@@ -13,7 +13,7 @@ const repositories = [];
 
 
 app.get("/repositories", (request, response) => {
-  return response.status(200).json(repositories)
+  return response.json(repositories)
 });
 
 app.post("/repositories", (request, response) => {
@@ -21,20 +21,20 @@ app.post("/repositories", (request, response) => {
   const repositorie = { id: uuid(), title, url, techs, likes: 0 }
   repositories.push(repositorie);
 
-  return response.json(repositories)
+  return response.json(repositorie)
 });
 
 app.put("/repositories/:id", (request, response) => {
   const { id } = request.params;
   const { title, url, techs } = request.body;
 
-  const repoIndex = repositories.findIndex(repositorie => repositorie.id = id);
-  console.log(repoIndex)
+  const repoIndex = repositories.findIndex(repositorie => repositorie.id === id);
+  const repoLikes = repositories.find(repo => repo.id ===id);
   if (repoIndex < 0) {
     return response.status(400).json({ error: 'Project not found.' })
   }
 
-  const repositorie = { id, title, url, techs }
+  const repositorie = { id, title, url, techs, likes: repoLikes.likes }
 
   repositories[repoIndex] = repositorie;
   return response.json(repositorie)
@@ -42,9 +42,9 @@ app.put("/repositories/:id", (request, response) => {
 
 app.delete("/repositories/:id", (request, response) => {
   const { id } = request.params;
-  const repoIndex = repositories.findIndex(repositorie => repositorie.id = id);
+  const repoIndex = repositories.findIndex(repositorie => repositorie.id === id);
   if (repoIndex < 0) {
-    return response.status(400).json({ error: 'Project not found.' })
+    return response.status(400).json({ error: 'Repositorie not found.' })
   }
 
   repositories.splice(repoIndex, 1);
@@ -54,12 +54,14 @@ app.delete("/repositories/:id", (request, response) => {
 
 app.post("/repositories/:id/like", (request, response) => {
   const { id } = request.params;
-
   const repositorie = repositories.find(repo => repo.id === id)
-  if (!repositorie) {
-    return response.status(400).json({ error: 'Project not found.' })
+  if (typeof repositorie === "undefined") {
+    return response.status(400).send();
   }
-  repositorie.likes += 1
+
+  repositorie.likes++
+
+  console.log(repositorie)
   return response.json(repositorie)
 });
 
