@@ -14,12 +14,13 @@ Este repositório contem uma API REST (Node.Js) como backend.
 
 ### ⚙️ Rodando o desafio
 
-Primeiramente executar 'yarn' para instalar as dependências e após, executar `yarn dev` para iniciar o projeto
-![yarn](https://user-images.githubusercontent.com/28319535/79516442-cbd17780-8021-11ea-88f8-792e46ab2e8d.png)
+Primeiramente executar `yarn` para instalar as dependências e após, executar `yarn dev` para iniciar o projeto
+![dev](https://i.ibb.co/Npr8WFP/1.jpg)
 
 ### 🧪 Testes
 
-Executar `yarn test` a fim de executar
+Executar `yarn test` a fim de executar os testes automatizados
+![test](https://i.ibb.co/ctzN2GJ/2.jpg)
 
 ### 🍆 Extras
 
