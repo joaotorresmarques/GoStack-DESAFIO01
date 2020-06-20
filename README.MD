@@ -10,7 +10,7 @@
 Este repositório contem uma API REST (Node.Js) como backend.
 
 ### 📺 Prévia
-![previa](https://i.ibb.co/8xmc2pG/screencast-nimbus-capture-2020-06-20-13-34-27.gif)
+![previa](previareadme.gif)
 
 ### ⚙️ Rodando o desafio
 
