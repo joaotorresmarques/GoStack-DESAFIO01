@@ -1,7 +1,7 @@
 <br/>
-<h1 align="center">
-<img alt="GoStack" src="https://ibb.co/QkttJc9" width="200px" />
-</h1>
+<p align="center">
+![GoStack](https://ibb.co/QkttJc9)
+</p>
 
 🚀 [Sobre o desafio](https://github.com/brunodesde1987/desafio-conceitos-nodejs/blob/master/README_ABOUT.md)
 
@@ -28,6 +28,6 @@ Para fixar o conteudo realizei alguns upgrades relação ao que foi solicitado p
 - [x] Teste
 
 
-<h1 align="center">
+<p align="center">
 Feito com 💛 por João Marcos
-</h1>
+</p>
