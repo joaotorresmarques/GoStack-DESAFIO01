@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-  <img src="https://ibb.co/QkttJc9" alt="GoStack"/>
+  <img src="https://i.ibb.co/zFDDm5s/Go-Stack-Logo.png" alt="GoStack"/>
 </p>
 
 🚀 [Sobre o desafio](https://github.com/brunodesde1987/desafio-conceitos-nodejs/blob/master/README_ABOUT.md)
