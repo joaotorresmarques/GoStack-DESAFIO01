@@ -1,55 +1,68 @@
-import React, { useState, useEffect } from "react";
-import Api from './services/api';
+const express = require("express");
+const cors = require("cors");
 
-import "./styles.css";
+const { uuid, isUuid } = require("uuidv4");
 
-function App() {
-  const [repositories, setRepository] = useState([])
+const app = express();
 
-  useEffect(() => {
-    Api.get('repositories').then(res => {
-      setRepository(res.data)
-    })
-  }, [])
-  async function handleAddRepository() {
-    const response = await Api.post('repositories', {
-      title: `New Repository ${Date.now()}`,
-      url: 'teste',
-      techs: [
-        'teste1',
-        'teste2'
-      ]
-    });
+app.use(express.json());
+app.use(cors());
 
-    const repository = response.data;
-    setRepository([...repositories, repository])
+const repositories = [];
+
+
+
+app.get("/repositories", (request, response) => {
+  return response.json(repositories)
+});
+
+app.post("/repositories", (request, response) => {
+  const { title, url, techs } = request.body;
+  const repositorie = { id: uuid(), title, url, techs, likes: 0 }
+  repositories.push(repositorie);
+
+  return response.json(repositorie)
+});
+
+app.put("/repositories/:id", (request, response) => {
+  const { id } = request.params;
+  const { title, url, techs } = request.body;
+
+  const repoIndex = repositories.findIndex(repositorie => repositorie.id === id);
+  const repoLikes = repositories.find(repo => repo.id ===id);
+  if (repoIndex < 0) {
+    return response.status(400).json({ error: 'Project not found.' })
   }
 
-  async function handleRemoveRepository(id) {
-    const response = await Api.delete(`repositories/${id}`);
-    const listRepository = repositories.filter(repo => repo.id !== id);
-    setRepository(listRepository);
+  const repositorie = { id, title, url, techs, likes: repoLikes.likes }
 
+  repositories[repoIndex] = repositorie;
+  return response.json(repositorie)
+});
 
+app.delete("/repositories/:id", (request, response) => {
+  const { id } = request.params;
+  const repoIndex = repositories.findIndex(repositorie => repositorie.id === id);
+  if (repoIndex < 0) {
+    return response.status(400).json({ error: 'Repositorie not found.' })
   }
 
-  return (
-    <div>
-      <ul data-testid="repository-list">
+  repositories.splice(repoIndex, 1);
 
-        {repositories.map(rep => (
+  return response.status(204).send();
+});
 
-          <li key={rep.id}> {rep.title}
-            <button onClick={() => handleRemoveRepository(rep.id)}>
-              Remover
-          </button>
-          </li>
-        ))}
-      </ul>
+app.post("/repositories/:id/like", (request, response) => {
+  const { id } = request.params;
+  const repositorie = repositories.find(repo => repo.id === id)
+  if (typeof repositorie === "undefined") {
+    return response.status(400).send();
+  }
 
-      <button onClick={handleAddRepository}>Adicionar</button>
-    </div>
-  );
-}
+  repositorie.likes++
 
-export default App;
+  console.log(repositorie)
+  return response.json(repositorie)
+});
+
+module.exports = app;
