@@ -19,14 +19,16 @@ Primeiramente executar `yarn` para instalar as dependências e após, executar `
 
 ### 🧪 Testes
 
-Executar `yarn test` a fim de executar os testes automatizados
+Executar `yarn test` a fim de executar os testes automatizados.
+(Alterei a rota do LIKE para ter a possibilidade de dar dislike no repositorio. Com isso precisará implementar o test para não falhar.)
+
 ![test](https://i.ibb.co/ctzN2GJ/2.jpg)
 
 ### 🍆 Extras
 
 Para fixar o conteudo realizei alguns upgrades relação ao que foi solicitado pela Rockeetseat.
 
-- [x] Teste
+- [x] Alteração da rota do LIKE para no front ter a possibilidade de dar dislike.
 
 
 <p align="center">

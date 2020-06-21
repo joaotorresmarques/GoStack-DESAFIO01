@@ -52,14 +52,14 @@ app.delete("/repositories/:id", (request, response) => {
   return response.status(204).send();
 });
 
-app.post("/repositories/:id/like", (request, response) => {
-  const { id } = request.params;
+app.post("/repositories/:id/:command/like", (request, response) => {
+  const { id, command } = request.params;
   const repositorie = repositories.find(repo => repo.id === id)
   if (typeof repositorie === "undefined") {
     return response.status(400).send();
   }
 
-  repositorie.likes++
+  command === '+' ? repositorie.likes++ : repositorie.likes--
 
   return response.json(repositorie)
 });
